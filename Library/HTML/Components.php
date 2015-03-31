@@ -143,5 +143,7 @@ class Library_HTML_Components
         if ($actual == $selected) {
             return 'selected="selected"';
         }
+
+        return '';
     }
 }
