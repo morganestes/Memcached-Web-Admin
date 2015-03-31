@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,7 @@
  * Sending command to memcache server via PECL memcache API http://pecl.php.net/package/memcache
  *
  * @author c.mahieux@of2m.fr
- * @since 20/03/2010
+ * @since  20/03/2010
  */
 class Library_Command_Memcached implements Library_Command_Interface
 {
@@ -45,35 +46,35 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Send stats command to server
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
      *
      * @return Array|Boolean
      */
-    public function stats($server, $port)
+    public function stats( $server, $port )
     {
         # Adding server
-        self::$_memcache->addServer($server, $port);
+        self::$_memcache->addServer( $server, $port );
 
         # Executing command
-        if(($return = self::$_memcache->getStats()))
-        {
+        if (( $return = self::$_memcache->getStats() )) {
             # Delete server key based
-            $stats = $return[$server.':'.$port];
+            $stats = $return[$server . ':' . $port];
 
             # Adding value that miss
-            $stats['delete_hits'] = '';
+            $stats['delete_hits']   = '';
             $stats['delete_misses'] = '';
-            $stats['incr_hits'] = '';
-            $stats['incr_misses'] = '';
-            $stats['decr_hits'] = '';
-            $stats['decr_misses'] = '';
-            $stats['cas_hits'] = '';
-            $stats['cas_misses'] = '';
-            $stats['cas_badval'] = '';
+            $stats['incr_hits']     = '';
+            $stats['incr_misses']   = '';
+            $stats['decr_hits']     = '';
+            $stats['decr_misses']   = '';
+            $stats['cas_hits']      = '';
+            $stats['cas_misses']    = '';
+            $stats['cas_badval']    = '';
 
             return $stats;
         }
+
         return false;
     }
 
@@ -81,12 +82,12 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Send stats settings command to server
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
      *
      * @return Array|Boolean
      */
-    public function settings($server, $port)
+    public function settings( $server, $port )
     {
         return false;
     }
@@ -95,51 +96,51 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Send stats items command to server to retrieve slabs stats
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
      *
      * @return Array|Boolean
      */
-    public function slabs($server, $port)
+    public function slabs( $server, $port )
     {
-        throw new Exception('PECL Memcache does not support slabs stats, use Server or Memcache instead');
+        throw new Exception( 'PECL Memcache does not support slabs stats, use Server or Memcache instead' );
     }
 
     /**
      * Send stats cachedump command to server to retrieve slabs items
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param Interger $slab Slab ID
+     * @param String   $server Hostname
+     * @param Integer  $port   Hostname Port
+     * @param Interger $slab   Slab ID
      *
      * @return Array|Boolean
      */
-    public function items($server, $port, $slab)
+    public function items( $server, $port, $slab )
     {
-        throw new Exception('PECL Memcache does not support slabs items stats, use Server or Memcache instead');
+        throw new Exception( 'PECL Memcache does not support slabs items stats, use Server or Memcache instead' );
     }
 
     /**
      * Send get command to server to retrieve an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to retrieve
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
+     * @param String  $key    Key to retrieve
      *
      * @return String
      */
-    public function get($server, $port, $key)
+    public function get( $server, $port, $key )
     {
         # Adding server
-        self::$_memcache->addServer($server, $port);
+        self::$_memcache->addServer( $server, $port );
 
         # Executing command : get
-        if($item = self::$_memcache->get($key))
-        {
-            return print_r($item, true);
+        if ($item = self::$_memcache->get( $key )) {
+            return print_r( $item, true );
         }
+
         return self::$_memcache->getResultMessage();
     }
 
@@ -147,24 +148,27 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Set an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to store
-     * @param Mixed $data Data to store
+     * @param String  $server   Hostname
+     * @param Integer $port     Hostname Port
+     * @param String  $key      Key to store
+     * @param Mixed   $data     Data to store
      * @param Integer $duration Duration
      *
      * @return String
      */
-    function set($server, $port, $key, $data, $duration)
+    function set( $server, $port, $key, $data, $duration )
     {
         # Adding server
-        self::$_memcache->addServer($server, $port);
+        self::$_memcache->addServer( $server, $port );
 
         # Checking duration
-        if($duration == '') { $duration = 0; }
+        if ($duration == '') {
+            $duration = 0;
+        }
 
         # Executing command : set
-        self::$_memcache->set($key, $data, $duration);
+        self::$_memcache->set( $key, $data, $duration );
+
         return self::$_memcache->getResultMessage();
     }
 
@@ -172,19 +176,20 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Delete an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to delete
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
+     * @param String  $key    Key to delete
      *
      * @return String
      */
-    public function delete($server, $port, $key)
+    public function delete( $server, $port, $key )
     {
         # Adding server
-        self::$_memcache->addServer($server, $port);
+        self::$_memcache->addServer( $server, $port );
 
         # Executing command : delete
-        self::$_memcache->delete($key);
+        self::$_memcache->delete( $key );
+
         return self::$_memcache->getResultMessage();
     }
 
@@ -192,23 +197,23 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Increment the key by value
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to increment
-     * @param Integer $value Value to increment
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
+     * @param String  $key    Key to increment
+     * @param Integer $value  Value to increment
      *
      * @return String
      */
-    function increment($server, $port, $key, $value)
+    function increment( $server, $port, $key, $value )
     {
         # Adding server
-        self::$_memcache->addServer($server, $port);
+        self::$_memcache->addServer( $server, $port );
 
         # Executing command : increment
-        if($result = self::$_memcache->increment($key, $value))
-        {
+        if ($result = self::$_memcache->increment( $key, $value )) {
             return $result;
         }
+
         return self::$_memcache->getResultMessage();
     }
 
@@ -216,23 +221,23 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Decrement the key by value
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to decrement
-     * @param Integer $value Value to decrement
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
+     * @param String  $key    Key to decrement
+     * @param Integer $value  Value to decrement
      *
      * @return String
      */
-    function decrement($server, $port, $key, $value)
+    function decrement( $server, $port, $key, $value )
     {
         # Adding server
-        self::$_memcache->addServer($server, $port);
+        self::$_memcache->addServer( $server, $port );
 
         # Executing command : decrement
-        if($result = self::$_memcache->decrement($key, $value))
-        {
+        if ($result = self::$_memcache->decrement( $key, $value )) {
             return $result;
         }
+
         return self::$_memcache->getResultMessage();
     }
 
@@ -240,19 +245,20 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Flush all items on a server
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param Integer $delay Delay before flushing server
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
+     * @param Integer $delay  Delay before flushing server
      *
      * @return String
      */
-    public function flush_all($server, $port, $delay)
+    public function flush_all( $server, $port, $delay )
     {
         # Adding server
-        self::$_memcache->addServer($server, $port);
+        self::$_memcache->addServer( $server, $port );
 
         # Executing command : delete
-        self::$_memcache->flush($delay);
+        self::$_memcache->flush( $delay );
+
         return self::$_memcache->getResultMessage();
     }
 
@@ -260,29 +266,29 @@ class Library_Command_Memcached implements Library_Command_Interface
      * Search for item
      * Return all the items matching parameters if successful, false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to search
+     * @param String  $server Hostname
+     * @param Integer $port   Hostname Port
+     * @param String  $key    Key to search
      *
      * @return Array
      */
-    function search($server, $port, $search, $level = false, $more = false)
+    function search( $server, $port, $search, $level = false, $more = false )
     {
-        throw new Exception('PECL Memcached does not support search function, use Server instead');
+        throw new Exception( 'PECL Memcached does not support search function, use Server instead' );
     }
 
     /**
      * Execute a telnet command on a server
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $command Command to execute
+     * @param String  $server  Hostname
+     * @param Integer $port    Hostname Port
+     * @param String  $command Command to execute
      *
      * @return String
      */
-    function telnet($server, $port, $command)
+    function telnet( $server, $port, $command )
     {
-        throw new Exception('PECL Memcached does not support telnet, use Server instead');
+        throw new Exception( 'PECL Memcached does not support telnet, use Server instead' );
     }
 }

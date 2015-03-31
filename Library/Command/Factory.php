@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,17 +19,21 @@
  * Factory for communication with Memcache Server
  *
  * @author c.mahieux@of2m.fr
- * @since 30/03/2010
+ * @since  30/03/2010
  */
 class Library_Command_Factory
 {
     private static $_object = array();
 
     # No explicit call of constructor
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     # No explicit call of clone()
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 
     /**
      * Accessor to command class instance by command type
@@ -37,17 +42,15 @@ class Library_Command_Factory
      *
      * @return void
      */
-    public static function instance($command)
+    public static function instance( $command )
     {
         # Importing configuration
         $_ini = Library_Configuration_Loader::singleton();
 
         # Instance does not exists
-        if(!isset(self::$_object[$_ini->get($command)]) || ($_ini->get($command) != 'Server'))
-        {
+        if ( ! isset( self::$_object[$_ini->get( $command )] ) || ( $_ini->get( $command ) != 'Server' )) {
             # Switching by API
-            switch($_ini->get($command))
-            {
+            switch ($_ini->get( $command )) {
                 case 'Memcache':
                     # PECL Memcache API
                     require_once 'Memcache.php';
@@ -68,7 +71,8 @@ class Library_Command_Factory
                     break;
             }
         }
-        return self::$_object[$_ini->get($command)];
+
+        return self::$_object[$_ini->get( $command )];
     }
 
     /**
@@ -78,14 +82,12 @@ class Library_Command_Factory
      *
      * @return void
      */
-    public static function api($api)
+    public static function api( $api )
     {
         # Instance does not exists
-        if(!isset(self::$_object[$api]) || ($api != 'Server'))
-        {
+        if ( ! isset( self::$_object[$api] ) || ( $api != 'Server' )) {
             # Switching by API
-            switch($api)
-            {
+            switch ($api) {
                 case 'Memcache':
                     # PECL Memcache API
                     require_once 'Memcache.php';
@@ -106,6 +108,7 @@ class Library_Command_Factory
                     break;
             }
         }
+
         return self::$_object[$api];
     }
 }

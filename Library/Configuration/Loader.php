@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,7 @@
  * Configuration class for editing, saving, ...
  *
  * @author c.mahieux@of2m.fr
- * @since 19/05/2010
+ * @since  19/05/2010
  */
 class Library_Configuration_Loader
 {
@@ -29,21 +30,23 @@ class Library_Configuration_Loader
     protected static $_iniPath = './Config/Memcache.php';
 
     # Configuration needed keys
-    protected static $_iniKeys = array('stats_api',
-                                       'slabs_api',
-                                       'items_api',
-                                       'get_api',
-                                       'set_api',
-                                       'delete_api',
-                                       'flush_all_api',
-                                       'connection_timeout',
-                                       'max_item_dump',
-                                       'refresh_rate',
-                                       'memory_alert',
-                                       'hit_rate_alert',
-                                       'eviction_alert',
-                                       'file_path',
-                                       'servers');
+    protected static $_iniKeys = array(
+        'stats_api',
+        'slabs_api',
+        'items_api',
+        'get_api',
+        'set_api',
+        'delete_api',
+        'flush_all_api',
+        'connection_timeout',
+        'max_item_dump',
+        'refresh_rate',
+        'memory_alert',
+        'hit_rate_alert',
+        'eviction_alert',
+        'file_path',
+        'servers'
+    );
 
     # Storage
     protected static $_ini = array();
@@ -66,10 +69,10 @@ class Library_Configuration_Loader
      */
     public static function singleton()
     {
-        if(!isset(self::$_instance))
-        {
+        if ( ! isset( self::$_instance )) {
             self::$_instance = new self();
         }
+
         return self::$_instance;
     }
 
@@ -81,12 +84,12 @@ class Library_Configuration_Loader
      *
      * @return Mixed
      */
-    public function get($key)
+    public function get( $key )
     {
-        if(isset(self::$_ini[$key]))
-        {
+        if (isset( self::$_ini[$key] )) {
             return self::$_ini[$key];
         }
+
         return false;
     }
 
@@ -98,12 +101,12 @@ class Library_Configuration_Loader
      *
      * @return Array
      */
-    public function cluster($cluster)
+    public function cluster( $cluster )
     {
-        if(isset(self::$_ini['servers'][$cluster]))
-        {
+        if (isset( self::$_ini['servers'][$cluster] )) {
             return self::$_ini['servers'][$cluster];
         }
+
         return array();
     }
 
@@ -115,27 +118,26 @@ class Library_Configuration_Loader
      *
      * @return Array
      */
-    public function server($server)
+    public function server( $server )
     {
-        foreach(self::$_ini['servers'] as $cluster => $servers)
-        {
-            if(isset(self::$_ini['servers'][$cluster][$server]))
-            {
+        foreach (self::$_ini['servers'] as $cluster => $servers) {
+            if (isset( self::$_ini['servers'][$cluster][$server] )) {
                 return self::$_ini['servers'][$cluster][$server];
             }
         }
+
         return array();
     }
 
     /**
      * Config key to set
      *
-     * @param String $key Key to set
-     * @param Mixed $value Value to set
+     * @param String $key   Key to set
+     * @param Mixed  $value Value to set
      *
      * @return Boolean
      */
-    public function set($key, $value)
+    public function set( $key, $value )
     {
         self::$_ini[$key] = $value;
     }
@@ -159,14 +161,13 @@ class Library_Configuration_Loader
     public function check()
     {
         # Checking configuration keys
-        foreach(self::$_iniKeys as $iniKey)
-        {
+        foreach (self::$_iniKeys as $iniKey) {
             # Ini file key not set
-            if(!isset(self::$_ini[$iniKey]))
-            {
+            if ( ! isset( self::$_ini[$iniKey] )) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -178,10 +179,11 @@ class Library_Configuration_Loader
      */
     public function write()
     {
-        if($this->check())
-        {
-            return is_numeric(file_put_contents(self::$_iniPath, '<?php' . PHP_EOL . 'return ' . var_export(self::$_ini, true) . ';'));
+        if ($this->check()) {
+            return is_numeric( file_put_contents( self::$_iniPath,
+                '<?php' . PHP_EOL . 'return ' . var_export( self::$_ini, true ) . ';' ) );
         }
+
         return false;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,7 @@
  * Error container
  *
  * @author elijaa@free.fr
- * @since 11/10/2010
+ * @since  11/10/2010
  */
 class Library_Data_Error
 {
@@ -32,9 +33,9 @@ class Library_Data_Error
      *
      * @return Boolean
      */
-    public static function add($error)
+    public static function add( $error )
     {
-        return array_push(self::$_errors, $error);
+        return array_push( self::$_errors, $error );
     }
 
     /**
@@ -44,7 +45,7 @@ class Library_Data_Error
      */
     public static function last()
     {
-        return (isset(self::$_errors[count(self::$_errors) - 1])) ? self::$_errors[count(self::$_errors) - 1] : null;
+        return ( isset( self::$_errors[count( self::$_errors ) - 1] ) ) ? self::$_errors[count( self::$_errors ) - 1] : null;
     }
 
     /**
@@ -54,6 +55,6 @@ class Library_Data_Error
      */
     public static function count()
     {
-        return count(self::$_errors);
+        return count( self::$_errors );
     }
 }

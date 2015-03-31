@@ -8,18 +8,19 @@
     <div class="sub-header corner full-size padding">Live <span class="green">Stats</span></div>
     <?php
     # Refresh rate increased
-    if($refresh_rate > $_ini->get('refresh_rate'))
-    { ?>
+    if ($refresh_rate > $_ini->get( 'refresh_rate' )) { ?>
         <div class="container corner" style="padding:9px;">
             Connections errors were discovered, to prevent any problem, refresh rate was increased by
-            <?php echo sprintf('%.1f', $refresh_rate - $_ini->get('refresh_rate')); ?> seconds.
+            <?php echo sprintf( '%.1f', $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds.
         </div>
     <?php
     } ?>
 
     <div class="full-size padding">
         <br/>
-        <span class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect('cluster_select', (isset($_GET['cluster'])) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this);"'); ?> stats</span>
+        <span class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect( 'cluster_select',
+                ( isset( $_GET['cluster'] ) ) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this);"' ); ?>
+            stats</span>
         <!-- In Progress
         <select class="right live" id="cluster_select" class="live" style="width:120px;">
             <option value="console" selected="selected">Console Mode</option>
@@ -28,7 +29,8 @@
         -->
         <pre id="stats" class="live">
 
-        Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
+        Loading live stats, please wait ~<?php echo sprintf( '%.0f',
+                5 + $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds ...
         </pre>
     </div>
     <div class="container corner full-size padding">
@@ -46,7 +48,8 @@
         </div>
         <div class="line">
             <span class="left setting">TIME</span>
-            Time taken to connect to the server and proceed the request, high value can indicate a latency or server problem
+            Time taken to connect to the server and proceed the request, high value can indicate a latency or server
+            problem
         </div>
         <div class="line">
             <span class="left setting">REQ/s</span>
@@ -66,7 +69,7 @@
         </div>
         <div class="line">
             <span class="left setting">READ/s</span>
-             Total number of bytes read by this server from network
+            Total number of bytes read by this server from network
         </div>
         <div class="line">
             <span class="left setting">WRITE/s</span>
