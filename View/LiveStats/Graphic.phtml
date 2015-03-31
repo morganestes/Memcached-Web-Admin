@@ -4,14 +4,14 @@ foreach ($stats as $name => $stat) {
     $series[] = '{id: \'' . $name . '\',
                   name: \'' . $name . '\',
                   type: \'line\',
-                  pointStart: (' . ( time() - ( 100 * $refresh_rate ) ) * 1000 . '),
-                  pointInterval: ' . ( $refresh_rate * 1000 ) . ',
-                  data: ' . json_encode( array_fill( 0, 100, -1 ) ) . ',
+                  pointStart: (' . (time() - (100 * $refresh_rate)) * 1000 . '),
+                  pointInterval: ' . ($refresh_rate * 1000) . ',
+                  data: ' . json_encode(array_fill(0, 100, -1)) . ',
                   enableMouseTracking: false}';
 }
 
 # Creating replacement Code for each stats by host
-$columns = array( 'REQ/s', 'EVI/s', '%MEM', 'TIME', 'CONN', 'READ/s', 'WRITE/s' );
+$columns = array('REQ/s', 'EVI/s', '%MEM', 'TIME', 'CONN', 'READ/s', 'WRITE/s');
 
 # Making line for each series
 foreach ($columns as $column) {
@@ -25,18 +25,18 @@ foreach ($columns as $column) {
     <div class="sub-header corner full-size padding">Live <span class="green">Stats</span></div>
     <?php
     # Refresh rate increased
-    if ($refresh_rate > $_ini->get( 'refresh_rate' )) { ?>
+    if ($refresh_rate > $_ini->get('refresh_rate')) { ?>
         <div class="container corner" style="padding:9px;">
             Connections errors were discovered, to prevent any problem, refresh rate was increased by
-            <?php echo sprintf( '%.1f', $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds.
+            <?php echo sprintf('%.1f', $refresh_rate - $_ini->get('refresh_rate')); ?> seconds.
         </div>
     <?php
     } ?>
 
     <div class="full-size padding">
         <br/>
-        <span class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect( 'cluster_select',
-                ( isset( $_GET['cluster'] ) ) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this);"' ); ?>
+        <span class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect('cluster_select',
+                (isset($_GET['cluster'])) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this);"'); ?>
             stats</span>
         <select class="right live" id="cluster_select" class="live" style="width:120px;">
             <option value="console">Console Mode</option>
@@ -44,32 +44,32 @@ foreach ($columns as $column) {
         </select>
 
         <div id="chartREQ/s" class="live">
-            Loading live stats, please wait ~<?php echo sprintf( '%.0f',
-                5 + $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds ...
+            Loading live stats, please wait ~<?php echo sprintf('%.0f',
+                5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
         </div>
         <div id="chartEVI/s" class="live">
-            Loading live stats, please wait ~<?php echo sprintf( '%.0f',
-                5 + $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds ...
+            Loading live stats, please wait ~<?php echo sprintf('%.0f',
+                5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
         </div>
         <div id="chart%MEM" class="live">
-            Loading live stats, please wait ~<?php echo sprintf( '%.0f',
-                5 + $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds ...
+            Loading live stats, please wait ~<?php echo sprintf('%.0f',
+                5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
         </div>
         <div id="chartTIME" class="live">
-            Loading live stats, please wait ~<?php echo sprintf( '%.0f',
-                5 + $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds ...
+            Loading live stats, please wait ~<?php echo sprintf('%.0f',
+                5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
         </div>
         <div id="chartCONN" class="live">
-            Loading live stats, please wait ~<?php echo sprintf( '%.0f',
-                5 + $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds ...
+            Loading live stats, please wait ~<?php echo sprintf('%.0f',
+                5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
         </div>
         <div id="chartREAD/s" class="live">
-            Loading live stats, please wait ~<?php echo sprintf( '%.0f',
-                5 + $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds ...
+            Loading live stats, please wait ~<?php echo sprintf('%.0f',
+                5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
         </div>
         <div id="chartWRITE/s" class="live">
-            Loading live stats, please wait ~<?php echo sprintf( '%.0f',
-                5 + $refresh_rate - $_ini->get( 'refresh_rate' ) ); ?> seconds ...
+            Loading live stats, please wait ~<?php echo sprintf('%.0f',
+                5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
         </div>
     </div>
     <div class="container corner full-size padding">

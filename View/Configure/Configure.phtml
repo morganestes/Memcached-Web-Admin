@@ -7,47 +7,47 @@
                 <div class="line">
                     Memcached commands API used by phpMemcacheAdmin<br/>
                     <a class="green" href="http://pecl.php.net/package/memcache">PECL Memcache</a> was
-                    <?php echo ( class_exists( 'Memcache', false ) ) ? '' : ' not '; ?> found on this server
+                    <?php echo (class_exists('Memcache', false)) ? '' : ' not '; ?> found on this server
                     <br/>
                     <a class="green" href="http://pecl.php.net/package/memcached">PECL Memcached</a> was
-                    <?php echo ( class_exists( 'Memcached', false ) ) ? '' : ' not '; ?> found on this server
+                    <?php echo (class_exists('Memcached', false)) ? '' : ' not '; ?> found on this server
                     <br/>
                     <hr/>
                 </div>
                 <div class="line">
                     <span class="left">Stats</span>
-                    <span class="right"><?php echo Library_HTML_Components::apiList( $_ini->get( 'stats_api' ),
-                            'stats_api' ); ?></span>
+                    <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('stats_api'),
+                            'stats_api'); ?></span>
                 </div>
                 <div class="line">
                     <span class="left">Slabs</span>
-                    <span class="right"><?php echo Library_HTML_Components::apiList( $_ini->get( 'slabs_api' ),
-                            'slabs_api' ); ?></span>
+                    <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('slabs_api'),
+                            'slabs_api'); ?></span>
                 </div>
                 <div class="line">
                     <span class="left">Items</span>
-                    <span class="right"><?php echo Library_HTML_Components::apiList( $_ini->get( 'items_api' ),
-                            'items_api' ); ?></span>
+                    <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('items_api'),
+                            'items_api'); ?></span>
                 </div>
                 <div class="line">
                     <span class="left">Get</span>
-                    <span class="right"><?php echo Library_HTML_Components::apiList( $_ini->get( 'get_api' ),
-                            'get_api' ); ?></span>
+                    <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('get_api'),
+                            'get_api'); ?></span>
                 </div>
                 <div class="line">
                     <span class="left">Set</span>
-                    <span class="right"><?php echo Library_HTML_Components::apiList( $_ini->get( 'set_api' ),
-                            'set_api' ); ?></span>
+                    <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('set_api'),
+                            'set_api'); ?></span>
                 </div>
                 <div class="line">
                     <span class="left">Delete</span>
-                    <span class="right"><?php echo Library_HTML_Components::apiList( $_ini->get( 'delete_api' ),
-                            'delete_api' ); ?></span>
+                    <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('delete_api'),
+                            'delete_api'); ?></span>
                 </div>
                 <div class="line">
                     <span class="left">Flush All</span>
-                    <span class="right"><?php echo Library_HTML_Components::apiList( $_ini->get( 'flush_all_api' ),
-                            'flush_all_api' ); ?></span>
+                    <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('flush_all_api'),
+                            'flush_all_api'); ?></span>
                 </div>
                 <div class="line" style="text-align:center;">
                     <hr/>
@@ -66,27 +66,27 @@
                 <div class="line">
                     <span class="left">Refresh Rate in sec</span>
                     <span class="right"><input type="text" name="refresh_rate"
-                                               value="<?php echo $_ini->get( 'refresh_rate' ); ?>"/></span>
+                                               value="<?php echo $_ini->get('refresh_rate'); ?>"/></span>
                 </div>
                 <div class="line">
                     <span class="left">Memory Alert</span>
                     <span class="right"><input type="text" name="memory_alert"
-                                               value="<?php echo $_ini->get( 'memory_alert' ); ?>"/></span>
+                                               value="<?php echo $_ini->get('memory_alert'); ?>"/></span>
                 </div>
                 <div class="line">
                     <span class="left">Hit Rate Alert</span>
                     <span class="right"><input type="text" name="hit_rate_alert"
-                                               value="<?php echo $_ini->get( 'hit_rate_alert' ); ?>"/></span>
+                                               value="<?php echo $_ini->get('hit_rate_alert'); ?>"/></span>
                 </div>
                 <div class="line">
                     <span class="left">Eviction Alert</span>
                     <span class="right"><input type="text" name="eviction_alert"
-                                               value="<?php echo $_ini->get( 'eviction_alert' ); ?>"/></span>
+                                               value="<?php echo $_ini->get('eviction_alert'); ?>"/></span>
                 </div>
                 <div class="line">
                     <span class="left">Temp Path</span>
                     <span class="right"><input type="text" name="file_path"
-                                               value="<?php echo $_ini->get( 'file_path' ); ?>"/></span>
+                                               value="<?php echo $_ini->get('file_path'); ?>"/></span>
                 </div>
                 <div class="line" style="text-align:center;">
                     <hr/>
@@ -105,12 +105,12 @@
                 <div class="line">
                     <span class="left">Timeout in sec</span>
                     <span class="right"><input type="text" name="connection_timeout"
-                                               value="<?php echo $_ini->get( 'connection_timeout' ); ?>"/></span>
+                                               value="<?php echo $_ini->get('connection_timeout'); ?>"/></span>
                 </div>
                 <div class="line">
                     <span class="left">Max Items</span>
                     <span class="right"><input type="text" name="max_item_dump"
-                                               value="<?php echo $_ini->get( 'max_item_dump' ); ?>"/></span>
+                                               value="<?php echo $_ini->get('max_item_dump'); ?>"/></span>
                 </div>
                 <div class="line" style="text-align:center;">
                     <hr/>
@@ -135,7 +135,7 @@
                     $cluster_id = 0;
 
                     # Looking into each cluster
-                    foreach ($_ini->get( 'servers' ) as $cluster => $servers) {
+                    foreach ($_ini->get('servers') as $cluster => $servers) {
                         $cluster_id++; ?>
                         <div id="cluster_<?php echo $cluster_id; ?>">
                             <hr/>

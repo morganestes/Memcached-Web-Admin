@@ -39,7 +39,7 @@ interface Library_Command_Interface
      *
      * @return Array|Boolean
      */
-    function stats( $server, $port );
+    function stats($server, $port);
 
     /**
      * Send stats settings command to server
@@ -50,7 +50,7 @@ interface Library_Command_Interface
      *
      * @return Array|Boolean
      */
-    public function settings( $server, $port );
+    public function settings($server, $port);
 
     /**
      * Retrieve slabs stats
@@ -61,7 +61,7 @@ interface Library_Command_Interface
      *
      * @return Array|Boolean
      */
-    function slabs( $server, $port );
+    function slabs($server, $port);
 
     /**
      * Retrieve items from a slabs
@@ -73,7 +73,7 @@ interface Library_Command_Interface
      *
      * @return Array|Boolean
      */
-    function items( $server, $port, $slab );
+    function items($server, $port, $slab);
 
     /**
      * Send get command to server to retrieve an item
@@ -85,7 +85,7 @@ interface Library_Command_Interface
      *
      * @return String
      */
-    function get( $server, $port, $key );
+    function get($server, $port, $key);
 
     /**
      * Set an item
@@ -99,7 +99,7 @@ interface Library_Command_Interface
      *
      * @return String
      */
-    function set( $server, $port, $key, $data, $duration );
+    function set($server, $port, $key, $data, $duration);
 
     /**
      * Delete an item
@@ -111,7 +111,7 @@ interface Library_Command_Interface
      *
      * @return String
      */
-    function delete( $server, $port, $key );
+    function delete($server, $port, $key);
 
     /**
      * Increment the key by value
@@ -124,7 +124,7 @@ interface Library_Command_Interface
      *
      * @return String
      */
-    function increment( $server, $port, $key, $value );
+    function increment($server, $port, $key, $value);
 
     /**
      * Decrement the key by value
@@ -137,7 +137,7 @@ interface Library_Command_Interface
      *
      * @return String
      */
-    function decrement( $server, $port, $key, $value );
+    function decrement($server, $port, $key, $value);
 
     /**
      * Flush all items on a server after delay
@@ -149,7 +149,7 @@ interface Library_Command_Interface
      *
      * @return String
      */
-    function flush_all( $server, $port, $delay );
+    function flush_all($server, $port, $delay);
 
     /**
      * Search for item
@@ -163,7 +163,7 @@ interface Library_Command_Interface
      *
      * @return array
      */
-    function search( $server, $port, $search, $level = false, $more = false );
+    function search($server, $port, $search, $level = false, $more = false);
 
     /**
      * Execute a telnet command on a server
@@ -175,5 +175,5 @@ interface Library_Command_Interface
      *
      * @return String
      */
-    function telnet( $server, $port, $command );
+    function telnet($server, $port, $command);
 }

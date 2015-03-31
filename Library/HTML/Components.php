@@ -28,7 +28,7 @@ class Library_HTML_Components
      *
      * @return String
      */
-    public static function serverSelect( $name, $selected = '', $class = '', $events = '' )
+    public static function serverSelect($name, $selected = '', $class = '', $events = '')
     {
         # Loading ini file
         $_ini = Library_Configuration_Loader::singleton();
@@ -37,23 +37,23 @@ class Library_HTML_Components
         $serverList = '<select id="' . $name . '" ';
 
         # CSS Class
-        $serverList .= ( $class != '' ) ? 'class="' . $class . '"' : '';
+        $serverList .= ($class != '') ? 'class="' . $class . '"' : '';
 
         # Javascript Events
         $serverList .= ' ' . $events . '>';
 
-        foreach ($_ini->get( 'servers' ) as $cluster => $servers) {
+        foreach ($_ini->get('servers') as $cluster => $servers) {
             # Cluster
             $serverList .= '<option value="' . $cluster . '" ';
-            $serverList .= ( $selected == $cluster ) ? 'selected="selected"' : '';
+            $serverList .= ($selected == $cluster) ? 'selected="selected"' : '';
             $serverList .= '>' . $cluster . ' cluster</option>';
 
             # Cluster server
             foreach ($servers as $name => $servers) {
                 $serverList .= '<option value="' . $name . '" ';
-                $serverList .= ( $selected == $name ) ? 'selected="selected"' : '';
-                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . ( ( strlen( $name ) > 38 ) ? substr( $name, 0,
-                            38 ) . ' [...]' : $name ) . '</option>';
+                $serverList .= ($selected == $name) ? 'selected="selected"' : '';
+                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . ((strlen($name) > 38) ? substr($name, 0,
+                            38) . ' [...]' : $name) . '</option>';
             }
         }
 
@@ -65,7 +65,7 @@ class Library_HTML_Components
      *
      * @return String
      */
-    public static function clusterSelect( $name, $selected = '', $class = '', $events = '' )
+    public static function clusterSelect($name, $selected = '', $class = '', $events = '')
     {
         # Loading ini file
         $_ini = Library_Configuration_Loader::singleton();
@@ -74,15 +74,15 @@ class Library_HTML_Components
         $clusterList = '<select id="' . $name . '" ';
 
         # CSS Class
-        $clusterList .= ( $class != '' ) ? 'class="' . $class . '"' : '';
+        $clusterList .= ($class != '') ? 'class="' . $class . '"' : '';
 
         # Javascript Events
         $clusterList .= ' ' . $events . '>';
 
-        foreach ($_ini->get( 'servers' ) as $cluster => $servers) {
+        foreach ($_ini->get('servers') as $cluster => $servers) {
             # Option value and selected case
             $clusterList .= '<option value="' . $cluster . '" ';
-            $clusterList .= ( $selected == $cluster ) ? 'selected="selected"' : '';
+            $clusterList .= ($selected == $cluster) ? 'selected="selected"' : '';
             $clusterList .= '>' . $cluster . ' cluster</option>';
         }
 
@@ -98,16 +98,16 @@ class Library_HTML_Components
      *
      * @return String
      */
-    public static function serverResponse( $hostname, $port, $data )
+    public static function serverResponse($hostname, $port, $data)
     {
         $header = '<span class="red">Server ' . $hostname . ':' . $port . "</span>\r\n";
         $return = '';
-        if (is_array( $data )) {
+        if (is_array($data)) {
             foreach ($data as $string) {
                 $return .= $string . "\r\n";
             }
 
-            return $header . htmlentities( $return, ENT_NOQUOTES|0, 'UTF-8' ) . "\r\n";
+            return $header . htmlentities($return, ENT_NOQUOTES|0, 'UTF-8') . "\r\n";
         }
 
         return $header . $return . $data . "\r\n";
@@ -121,12 +121,12 @@ class Library_HTML_Components
      *
      * @return String
      */
-    public static function apiList( $iniAPI = '', $id )
+    public static function apiList($iniAPI = '', $id)
     {
         return '<select id="' . $id . '" name="' . $id . '">
-                <option value="Server" ' . self::selected( 'Server', $iniAPI ) . '>Server API</option>
-                <option value="Memcache" ' . self::selected( 'Memcache', $iniAPI ) . '>Memcache API</option>
-                <option value="Memcached" ' . self::selected( 'Memcached', $iniAPI ) . '>Memcached API</option>
+                <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
+                <option value="Memcache" ' . self::selected('Memcache', $iniAPI) . '>Memcache API</option>
+                <option value="Memcached" ' . self::selected('Memcached', $iniAPI) . '>Memcached API</option>
                 </select>';
     }
 
@@ -138,7 +138,7 @@ class Library_HTML_Components
      *
      * @return String
      */
-    private static function selected( $actual, $selected )
+    private static function selected($actual, $selected)
     {
         if ($actual == $selected) {
             return 'selected="selected"';

@@ -42,15 +42,15 @@ class Library_Command_Factory
      *
      * @return void
      */
-    public static function instance( $command )
+    public static function instance($command)
     {
         # Importing configuration
         $_ini = Library_Configuration_Loader::singleton();
 
         # Instance does not exists
-        if ( ! isset( self::$_object[$_ini->get( $command )] ) || ( $_ini->get( $command ) != 'Server' )) {
+        if (! isset(self::$_object[$_ini->get($command)]) || ($_ini->get($command) != 'Server')) {
             # Switching by API
-            switch ($_ini->get( $command )) {
+            switch ($_ini->get($command)) {
                 case 'Memcache':
                     # PECL Memcache API
                     require_once 'Memcache.php';
@@ -72,7 +72,7 @@ class Library_Command_Factory
             }
         }
 
-        return self::$_object[$_ini->get( $command )];
+        return self::$_object[$_ini->get($command)];
     }
 
     /**
@@ -82,10 +82,10 @@ class Library_Command_Factory
      *
      * @return void
      */
-    public static function api( $api )
+    public static function api($api)
     {
         # Instance does not exists
-        if ( ! isset( self::$_object[$api] ) || ( $api != 'Server' )) {
+        if (! isset(self::$_object[$api]) || ($api != 'Server')) {
             # Switching by API
             switch ($api) {
                 case 'Memcache':

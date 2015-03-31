@@ -69,7 +69,7 @@ class Library_Configuration_Loader
      */
     public static function singleton()
     {
-        if ( ! isset( self::$_instance )) {
+        if (! isset(self::$_instance)) {
             self::$_instance = new self();
         }
 
@@ -84,9 +84,9 @@ class Library_Configuration_Loader
      *
      * @return Mixed
      */
-    public function get( $key )
+    public function get($key)
     {
-        if (isset( self::$_ini[$key] )) {
+        if (isset(self::$_ini[$key])) {
             return self::$_ini[$key];
         }
 
@@ -101,9 +101,9 @@ class Library_Configuration_Loader
      *
      * @return Array
      */
-    public function cluster( $cluster )
+    public function cluster($cluster)
     {
-        if (isset( self::$_ini['servers'][$cluster] )) {
+        if (isset(self::$_ini['servers'][$cluster])) {
             return self::$_ini['servers'][$cluster];
         }
 
@@ -118,10 +118,10 @@ class Library_Configuration_Loader
      *
      * @return Array
      */
-    public function server( $server )
+    public function server($server)
     {
         foreach (self::$_ini['servers'] as $cluster => $servers) {
-            if (isset( self::$_ini['servers'][$cluster][$server] )) {
+            if (isset(self::$_ini['servers'][$cluster][$server])) {
                 return self::$_ini['servers'][$cluster][$server];
             }
         }
@@ -137,7 +137,7 @@ class Library_Configuration_Loader
      *
      * @return Boolean
      */
-    public function set( $key, $value )
+    public function set($key, $value)
     {
         self::$_ini[$key] = $value;
     }
@@ -163,7 +163,7 @@ class Library_Configuration_Loader
         # Checking configuration keys
         foreach (self::$_iniKeys as $iniKey) {
             # Ini file key not set
-            if ( ! isset( self::$_ini[$iniKey] )) {
+            if (! isset(self::$_ini[$iniKey])) {
                 return false;
             }
         }
@@ -180,8 +180,8 @@ class Library_Configuration_Loader
     public function write()
     {
         if ($this->check()) {
-            return is_numeric( file_put_contents( self::$_iniPath,
-                '<?php' . PHP_EOL . 'return ' . var_export( self::$_ini, true ) . ';' ) );
+            return is_numeric(file_put_contents(self::$_iniPath,
+                '<?php' . PHP_EOL . 'return ' . var_export(self::$_ini, true) . ';'));
         }
 
         return false;
