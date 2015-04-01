@@ -1,0 +1,16 @@
+{
+  "name": "morganestes/memcached_admin",
+  "description": "Memcache Web Admin Interface",
+  "minimum-stability": "stable",
+  "license": "GPLv2 or later",
+  "authors": [
+    {
+      "name": "Morgan Estes",
+      "email": "morgan.estes@gmail.com"
+    }
+  ],
+  "require": {
+    "slim/slim-skeleton": "2.1.2",
+    "components/backbone": "1.1.2"
+  }
+}
